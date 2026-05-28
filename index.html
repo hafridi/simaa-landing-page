@@ -101,6 +101,42 @@ nav {
   border-color: rgba(109,191,170,0.5);
 }
 
+/* ── HERO PROBLEM STATEMENT ── */
+.hero-problem {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+.hero-problem-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.hero-problem-app {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.35);
+  font-style: italic;
+  text-decoration: line-through;
+  text-decoration-color: rgba(109,191,170,0.3);
+}
+.hero-problem-says {
+  font-size: clamp(14px, 2vw, 18px);
+  color: rgba(255,255,255,0.25);
+  font-weight: 300;
+}
+.hero-problem-you {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  font-style: italic;
+}
+
 /* ── HERO ── */
 .hero {
   min-height: 100vh;
@@ -797,7 +833,25 @@ footer {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-mark">
+
+    <!-- Problem statement -->
+    <div class="hero-problem" style="margin-bottom: 40px; opacity:0; animation: fadeUp 0.8s ease 0.2s forwards;">
+      <div class="hero-problem-row">
+        <span class="hero-problem-app">Calm</span>
+        <span class="hero-problem-says">tells you to connect with the universe.</span>
+      </div>
+      <div class="hero-problem-row">
+        <span class="hero-problem-app">Headspace</span>
+        <span class="hero-problem-says">says find your inner light.</span>
+      </div>
+      <div class="hero-problem-row" style="margin-top: 16px;">
+        <span class="hero-problem-you">You already know where peace comes from.</span>
+      </div>
+    </div>
+
+    <div class="hero-divider" style="width:40px; height:1px; background:rgba(109,191,170,0.3); margin: 0 auto 36px; opacity:0; animation: fadeUp 0.8s ease 0.3s forwards;"></div>
+
+    <div class="hero-mark" style="opacity:0; animation: fadeUp 0.8s ease 0.35s forwards; animation-fill-mode: forwards;">
       <svg width="52" height="58" viewBox="0 0 72 76" fill="none">
         <path d="M10 30 Q8 8 28 5 Q50 2 56 24 Q62 44 40 57 Q26 65 18 76" fill="none" stroke="rgba(109,191,170,0.9)" stroke-width="4" stroke-linecap="round"/>
         <path d="M28 5 Q58 0 64 22 Q70 40 52 54" fill="none" stroke="rgba(109,191,170,0.3)" stroke-width="2" stroke-linecap="round"/>
@@ -807,14 +861,14 @@ footer {
       </svg>
     </div>
 
-    <div class="hero-eyebrow">Coming soon · Muslim wellness</div>
+    <div class="hero-eyebrow">The Muslim alternative to Calm & Headspace</div>
 
     <h1 class="hero-title">Simaa</h1>
     <div class="hero-arabic">سماع</div>
 
     <p class="hero-tagline">
-      "Listen to what your soul already knows."<br>
-      Guided dhikr, sleep stories & daily reflection — rooted in your faith.
+      Guided dhikr, Islamic sleep stories & daily reflection.<br>
+      Wellness rooted in your faith — not the universe.
     </p>
 
     <!-- WAITLIST FORM -->
@@ -868,7 +922,7 @@ footer {
 <!-- FEATURES -->
 <section class="features">
   <div class="features-eyebrow">What's inside</div>
-  <h2 class="features-title">Everything your faith <em>already</em><br>prescribes for your wellbeing</h2>
+  <h2 class="features-title">Everything Calm does. <em>Built for Muslims.</em></h2>
 
   <div class="features-grid">
     <div class="feature-card reveal">
@@ -935,8 +989,8 @@ footer {
     <div class="stat-label">Of Muslims report serious distress but only 11% ever seek help</div>
   </div>
   <div class="stat-item">
-    <span class="stat-val">$0</span>
-    <div class="stat-label">Calm costs nothing to use — but speaks no Islamic language</div>
+    <span class="stat-val">0</span>
+    <div class="stat-label">Major wellness apps built specifically for Muslims — until now</div>
   </div>
 </div>
 
@@ -956,7 +1010,7 @@ footer {
 <!-- FINAL CTA -->
 <section class="final-cta">
   <h2 class="final-title">Your deen deserves <em>better</em><br>than a generic app.</h2>
-  <p class="final-sub">Be the first to experience Simaa. Founding members get 50% off, forever.</p>
+  <p class="final-sub">Calm was not built for you. Simaa was.<br>Join the waitlist — founding members get 50% off, forever.</p>
 
   <div style="width:100%; max-width:480px; margin: 0 auto;">
     <div id="mlb2-41872964-2" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-41872964">

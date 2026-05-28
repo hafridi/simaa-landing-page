@@ -1,0 +1,32 @@
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+ 
+# Editor directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+ 
+# Logs
+*.log
+npm-debug.log*
+ 
+# Environment files — never commit API keys
+.env
+.env.local
+.env.*.local
+ 
+# Dependency folders
+node_modules/
+ 
+# Build output
+dist/
+build/
+ 
