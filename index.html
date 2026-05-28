@@ -1,1263 +1,1053 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Simaa — A Muslim wellness app for guided dhikr, sleep stories, and daily reflection. Coming soon."
-    />
-    <meta property="og:title" content="Simaa · سماع" />
-    <meta
-      property="og:description"
-      content="Listen to what your soul already knows. A Muslim wellness app coming soon."
-    />
-    <meta property="og:image" content="https://simaa.app/og.png" />
-    <title>Simaa · سماع — Muslim Wellness</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Simaa — A Muslim wellness app for guided dhikr, sleep stories, and daily reflection. Coming soon.">
+<meta property="og:title" content="Simaa · سماع">
+<meta property="og:description" content="Listen to what your soul already knows. A Muslim wellness app coming soon.">
+<meta property="og:image" content="https://simaa.app/og.png">
+<title>Simaa · سماع — Muslim Wellness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 
-      :root {
-        --night: #0c1710;
-        --forest: #1a2d1e;
-        --teal: #2a6b5a;
-        --teal-mid: #3d8a76;
-        --teal-light: #6dbfaa;
-        --teal-pale: #b8e0d8;
-        --teal-ghost: #eaf6f3;
-        --sand: #f2ebe0;
-        --cream: #faf8f4;
-        --amber: #b8834a;
-        --ink: #181818;
-        --ink-mid: #444;
-        --ink-light: #909090;
-        --border: #e2ddd6;
-        --white: #fff;
-      }
 
-      html {
-        scroll-behavior: smooth;
-      }
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      body {
-        font-family: "Outfit", sans-serif;
-        background: var(--night);
-        color: var(--white);
-        overflow-x: hidden;
-        cursor: default;
-      }
+:root {
+  --night:       #0c1710;
+  --forest:      #1a2d1e;
+  --teal:        #2a6b5a;
+  --teal-mid:    #3d8a76;
+  --teal-light:  #6dbfaa;
+  --teal-pale:   #b8e0d8;
+  --teal-ghost:  #eaf6f3;
+  --sand:        #f2ebe0;
+  --cream:       #faf8f4;
+  --amber:       #b8834a;
+  --ink:         #181818;
+  --ink-mid:     #444;
+  --ink-light:   #909090;
+  --border:      #e2ddd6;
+  --white:       #fff;
+}
 
-      /* ── NOISE TEXTURE OVERLAY ── */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-        pointer-events: none;
-        z-index: 1000;
-        opacity: 0.4;
-      }
+html { scroll-behavior: smooth; }
 
-      /* ── NAV ── */
-      nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        padding: 20px 48px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: linear-gradient(
-          to bottom,
-          rgba(12, 23, 16, 0.95) 0%,
-          transparent 100%
-        );
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-      }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--night);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: default;
+}
 
-      .nav-logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-      }
-      .nav-logo-text {
-        font-family: "Cormorant", serif;
-        font-size: 22px;
-        font-weight: 300;
-        color: white;
-        letter-spacing: 4px;
-      }
-      .nav-arabic {
-        font-size: 16px;
-        color: rgba(255, 255, 255, 0.25);
-        font-weight: 300;
-      }
-      .nav-cta {
-        font-size: 12px;
-        color: var(--teal-light);
-        border: 0.5px solid rgba(109, 191, 170, 0.3);
-        padding: 8px 20px;
-        border-radius: 20px;
-        text-decoration: none;
-        letter-spacing: 0.06em;
-        transition: all 0.2s;
-      }
-      .nav-cta:hover {
-        background: rgba(109, 191, 170, 0.1);
-        border-color: rgba(109, 191, 170, 0.5);
-      }
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
 
-      /* ── HERO ── */
-      .hero {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        padding: 120px 24px 80px;
-        text-align: center;
-        overflow: hidden;
-      }
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(12,23,16,0.95) 0%, transparent 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
 
-      /* Radial glow */
-      .hero::before {
-        content: "";
-        position: absolute;
-        top: -10%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 800px;
-        height: 800px;
-        background: radial-gradient(
-          ellipse,
-          rgba(42, 107, 90, 0.22) 0%,
-          transparent 65%
-        );
-        pointer-events: none;
-      }
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-text {
+  font-family: 'Cormorant', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: white;
+  letter-spacing: 4px;
+}
+.nav-arabic {
+  font-size: 16px;
+  color: rgba(255,255,255,0.25);
+  font-weight: 300;
+}
+.nav-cta {
+  font-size: 12px;
+  color: var(--teal-light);
+  border: 0.5px solid rgba(109,191,170,0.3);
+  padding: 8px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: all 0.2s;
+}
+.nav-cta:hover {
+  background: rgba(109,191,170,0.1);
+  border-color: rgba(109,191,170,0.5);
+}
 
-      /* Dot grid */
-      .hero::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image: radial-gradient(
-          circle,
-          rgba(109, 191, 170, 0.06) 1px,
-          transparent 1px
-        );
-        background-size: 36px 36px;
-        pointer-events: none;
-      }
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 120px 24px 80px;
+  text-align: center;
+  overflow: hidden;
+}
 
-      .hero-content {
-        position: relative;
-        z-index: 2;
-        max-width: 720px;
-      }
+/* Radial glow */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(ellipse, rgba(42,107,90,0.22) 0%, transparent 65%);
+  pointer-events: none;
+}
 
-      /* Animated sin mark */
-      .hero-mark {
-        width: 88px;
-        height: 88px;
-        border-radius: 22px;
-        background: var(--forest);
-        border: 0.5px solid rgba(109, 191, 170, 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 32px;
-        animation: markFloat 6s ease-in-out infinite;
-        box-shadow: 0 0 40px rgba(42, 107, 90, 0.3);
-      }
+/* Dot grid */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(109,191,170,0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
 
-      @keyframes markFloat {
-        0%,
-        100% {
-          transform: translateY(0px);
-          box-shadow: 0 0 40px rgba(42, 107, 90, 0.3);
-        }
-        50% {
-          transform: translateY(-8px);
-          box-shadow: 0 16px 48px rgba(42, 107, 90, 0.4);
-        }
-      }
+.hero-content { position: relative; z-index: 2; max-width: 720px; }
 
-      .hero-eyebrow {
-        font-size: 11px;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--teal-light);
-        margin-bottom: 20px;
-        opacity: 0;
-        animation: fadeUp 0.8s ease 0.2s forwards;
-      }
+/* Animated sin mark */
+.hero-mark {
+  width: 88px;
+  height: 88px;
+  border-radius: 22px;
+  background: var(--forest);
+  border: 0.5px solid rgba(109,191,170,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 32px;
+  animation: markFloat 6s ease-in-out infinite;
+  box-shadow: 0 0 40px rgba(42,107,90,0.3);
+}
 
-      .hero-title {
-        font-family: "Cormorant", serif;
-        font-size: clamp(52px, 8vw, 88px);
-        font-weight: 300;
-        line-height: 1;
-        letter-spacing: 0.04em;
-        color: white;
-        margin-bottom: 10px;
-        opacity: 0;
-        animation: fadeUp 0.8s ease 0.35s forwards;
-      }
+@keyframes markFloat {
+  0%, 100% { transform: translateY(0px); box-shadow: 0 0 40px rgba(42,107,90,0.3); }
+  50% { transform: translateY(-8px); box-shadow: 0 16px 48px rgba(42,107,90,0.4); }
+}
 
-      .hero-arabic {
-        font-size: clamp(22px, 4vw, 36px);
-        color: rgba(255, 255, 255, 0.2);
-        font-weight: 300;
-        direction: rtl;
-        margin-bottom: 28px;
-        opacity: 0;
-        animation: fadeUp 0.8s ease 0.45s forwards;
-      }
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal-light);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
 
-      .hero-tagline {
-        font-family: "Cormorant", serif;
-        font-size: clamp(18px, 2.5vw, 24px);
-        font-weight: 300;
-        font-style: italic;
-        color: rgba(255, 255, 255, 0.5);
-        line-height: 1.6;
-        margin-bottom: 52px;
-        max-width: 520px;
-        margin-left: auto;
-        margin-right: auto;
-        opacity: 0;
-        animation: fadeUp 0.8s ease 0.55s forwards;
-      }
+.hero-title {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(52px, 8vw, 88px);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: 0.04em;
+  color: white;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.35s forwards;
+}
 
-      /* ── WAITLIST FORM ── */
-      .waitlist-form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        width: 100%;
-        max-width: 440px;
-        margin: 0 auto 24px;
-        opacity: 0;
-        animation: fadeUp 0.8s ease 0.7s forwards;
-      }
+.hero-arabic {
+  font-size: clamp(22px, 4vw, 36px);
+  color: rgba(255,255,255,0.2);
+  font-weight: 300;
+  direction: rtl;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.45s forwards;
+}
 
-      .form-row {
-        display: flex;
-        width: 100%;
-        gap: 0;
-        background: rgba(255, 255, 255, 0.05);
-        border: 0.5px solid rgba(255, 255, 255, 0.12);
-        border-radius: 14px;
-        overflow: hidden;
-        transition: border-color 0.2s;
-      }
-      .form-row:focus-within {
-        border-color: rgba(109, 191, 170, 0.4);
-        background: rgba(255, 255, 255, 0.07);
-      }
+.hero-tagline {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+  margin-bottom: 52px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.55s forwards;
+}
 
-      .form-input {
-        flex: 1;
-        background: transparent;
-        border: none;
-        outline: none;
-        padding: 16px 20px;
-        font-size: 14px;
-        color: white;
-        font-family: "Outfit", sans-serif;
-        font-weight: 300;
-      }
-      .form-input::placeholder {
-        color: rgba(255, 255, 255, 0.25);
-      }
+/* ── WAITLIST FORM ── */
+.waitlist-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.7s forwards;
+}
 
-      .form-btn {
-        background: var(--teal);
-        color: white;
-        border: none;
-        padding: 14px 24px;
-        font-size: 13px;
-        font-family: "Outfit", sans-serif;
-        font-weight: 500;
-        cursor: pointer;
-        letter-spacing: 0.04em;
-        transition: background 0.2s;
-        white-space: nowrap;
-        border-radius: 0 12px 12px 0;
-      }
-      .form-btn:hover {
-        background: var(--teal-mid);
-      }
-      .form-btn:active {
-        transform: scale(0.98);
-      }
+.form-row {
+  display: flex;
+  width: 100%;
+  gap: 0;
+  background: rgba(255,255,255,0.05);
+  border: 0.5px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.form-row:focus-within {
+  border-color: rgba(109,191,170,0.4);
+  background: rgba(255,255,255,0.07);
+}
 
-      .form-question {
-        width: 100%;
-        background: rgba(255, 255, 255, 0.03);
-        border: 0.5px solid rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
-        padding: 14px 18px;
-      }
-      .form-question-label {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.35);
-        margin-bottom: 8px;
-        letter-spacing: 0.04em;
-      }
-      .form-question-opts {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-      }
-      .fq-opt {
-        font-size: 11px;
-        padding: 5px 12px;
-        border-radius: 20px;
-        border: 0.5px solid rgba(255, 255, 255, 0.12);
-        background: transparent;
-        color: rgba(255, 255, 255, 0.4);
-        cursor: pointer;
-        font-family: "Outfit", sans-serif;
-        transition: all 0.15s;
-      }
-      .fq-opt:hover,
-      .fq-opt.sel {
-        background: rgba(42, 107, 90, 0.3);
-        border-color: rgba(109, 191, 170, 0.3);
-        color: var(--teal-light);
-      }
+.form-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 16px 20px;
+  font-size: 14px;
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+}
+.form-input::placeholder { color: rgba(255,255,255,0.25); }
 
-      .form-note {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.2);
-        letter-spacing: 0.04em;
-      }
+.form-btn {
+  background: var(--teal);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  font-size: 13px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.2s;
+  white-space: nowrap;
+  border-radius: 0 12px 12px 0;
+}
+.form-btn:hover { background: var(--teal-mid); }
+.form-btn:active { transform: scale(0.98); }
 
-      /* Success state */
-      .success-msg {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        padding: 24px;
-        background: rgba(42, 107, 90, 0.15);
-        border: 0.5px solid rgba(109, 191, 170, 0.2);
-        border-radius: 16px;
-        max-width: 440px;
-        margin: 0 auto;
-        opacity: 0;
-        animation: fadeUp 0.5s ease forwards;
-      }
-      .success-msg.show {
-        display: flex;
-      }
-      .success-icon {
-        font-size: 28px;
-      }
-      .success-title {
-        font-family: "Cormorant", serif;
-        font-size: 20px;
-        font-weight: 300;
-        color: white;
-      }
-      .success-sub {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.4);
-        text-align: center;
-        line-height: 1.6;
-      }
+.form-question {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 0.5px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+.form-question-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+.form-question-opts {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.fq-opt {
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 0.5px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.15s;
+}
+.fq-opt:hover, .fq-opt.sel {
+  background: rgba(42,107,90,0.3);
+  border-color: rgba(109,191,170,0.3);
+  color: var(--teal-light);
+}
 
-      /* ── FEATURES SECTION ── */
-      .features {
-        padding: 120px 48px;
-        max-width: 1100px;
-        margin: 0 auto;
-        position: relative;
-      }
+.form-note {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.04em;
+}
 
-      .features-eyebrow {
-        font-size: 10px;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--teal-light);
-        margin-bottom: 16px;
-        text-align: center;
-      }
-      .features-title {
-        font-family: "Cormorant", serif;
-        font-size: clamp(36px, 5vw, 56px);
-        font-weight: 300;
-        text-align: center;
-        line-height: 1.15;
-        margin-bottom: 72px;
-        color: white;
-      }
-      .features-title em {
-        font-style: italic;
-        color: rgba(255, 255, 255, 0.45);
-      }
+/* Success state */
+.success-msg {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px;
+  background: rgba(42,107,90,0.15);
+  border: 0.5px solid rgba(109,191,170,0.2);
+  border-radius: 16px;
+  max-width: 440px;
+  margin: 0 auto;
+  opacity: 0;
+  animation: fadeUp 0.5s ease forwards;
+}
+.success-msg.show { display: flex; }
+.success-icon { font-size: 28px; }
+.success-title {
+  font-family: 'Cormorant', serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: white;
+}
+.success-sub { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; line-height: 1.6; }
 
-      .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-      }
 
-      .feature-card {
-        background: var(--forest);
-        border: 0.5px solid rgba(255, 255, 255, 0.06);
-        border-radius: 20px;
-        padding: 32px;
-        transition:
-          border-color 0.2s,
-          transform 0.2s;
-        position: relative;
-        overflow: hidden;
-      }
-      .feature-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(109, 191, 170, 0.3),
-          transparent
-        );
-      }
-      .feature-card:hover {
-        border-color: rgba(109, 191, 170, 0.15);
-        transform: translateY(-2px);
-      }
 
-      .feature-icon {
-        font-size: 28px;
-        margin-bottom: 18px;
-        display: block;
-      }
-      .feature-title {
-        font-family: "Cormorant", serif;
-        font-size: 22px;
-        font-weight: 400;
-        color: white;
-        margin-bottom: 10px;
-      }
-      .feature-desc {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.4);
-        line-height: 1.75;
-      }
-      .feature-tag {
-        display: inline-block;
-        margin-top: 16px;
-        font-size: 10px;
-        color: var(--teal-light);
-        background: rgba(42, 107, 90, 0.2);
-        border: 0.5px solid rgba(109, 191, 170, 0.15);
-        padding: 3px 10px;
-        border-radius: 20px;
-        letter-spacing: 0.06em;
-      }
+/* ── FEATURES SECTION ── */
+.features {
+  padding: 120px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
 
-      /* ── WHY SECTION ── */
-      .why {
-        padding: 80px 48px 120px;
-        max-width: 900px;
-        margin: 0 auto;
-      }
+.features-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal-light);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.features-title {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 300;
+  text-align: center;
+  line-height: 1.15;
+  margin-bottom: 72px;
+  color: white;
+}
+.features-title em { font-style: italic; color: rgba(255,255,255,0.45); }
 
-      .why-card {
-        background: rgba(42, 107, 90, 0.08);
-        border: 0.5px solid rgba(109, 191, 170, 0.12);
-        border-radius: 24px;
-        padding: 56px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-      .why-card::before {
-        content: "";
-        position: absolute;
-        top: -100px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(
-          ellipse,
-          rgba(42, 107, 90, 0.15) 0%,
-          transparent 70%
-        );
-        pointer-events: none;
-      }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
 
-      .why-arabic {
-        font-size: 48px;
-        color: rgba(255, 255, 255, 0.12);
-        direction: rtl;
-        margin-bottom: 24px;
-        position: relative;
-      }
-      .why-quote {
-        font-family: "Cormorant", serif;
-        font-size: clamp(22px, 3vw, 32px);
-        font-weight: 300;
-        font-style: italic;
-        color: rgba(255, 255, 255, 0.75);
-        line-height: 1.6;
-        margin-bottom: 16px;
-        position: relative;
-      }
-      .why-ref {
-        font-size: 12px;
-        color: var(--teal-light);
-        letter-spacing: 0.08em;
-        position: relative;
-      }
+.feature-card {
+  background: var(--forest);
+  border: 0.5px solid rgba(255,255,255,0.06);
+  border-radius: 20px;
+  padding: 32px;
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(109,191,170,0.3), transparent);
+}
+.feature-card:hover {
+  border-color: rgba(109,191,170,0.15);
+  transform: translateY(-2px);
+}
 
-      /* ── STATS ── */
-      .stats {
-        padding: 0 48px 120px;
-        max-width: 900px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        text-align: center;
-      }
-      .stat-item {
-      }
-      .stat-val {
-        font-family: "Cormorant", serif;
-        font-size: 52px;
-        font-weight: 300;
-        color: var(--teal-light);
-        line-height: 1;
-        display: block;
-      }
-      .stat-label {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.3);
-        margin-top: 6px;
-        line-height: 1.5;
-      }
+.feature-icon {
+  font-size: 28px;
+  margin-bottom: 18px;
+  display: block;
+}
+.feature-title {
+  font-family: 'Cormorant', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: white;
+  margin-bottom: 10px;
+}
+.feature-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.75;
+}
+.feature-tag {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 10px;
+  color: var(--teal-light);
+  background: rgba(42,107,90,0.2);
+  border: 0.5px solid rgba(109,191,170,0.15);
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.06em;
+}
 
-      /* ── RAMADAN BANNER ── */
-      .ramadan-banner {
-        margin: 0 48px 120px;
-        max-width: 1000px;
-        margin-left: auto;
-        margin-right: auto;
-        background: linear-gradient(135deg, #1a1200, #2d2000);
-        border: 0.5px solid rgba(184, 131, 74, 0.2);
-        border-radius: 20px;
-        padding: 40px 48px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 32px;
-      }
-      .rb-left {
-      }
-      .rb-tag {
-        font-size: 10px;
-        color: var(--amber);
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-      }
-      .rb-title {
-        font-family: "Cormorant", serif;
-        font-size: 28px;
-        font-weight: 300;
-        color: white;
-        margin-bottom: 8px;
-      }
-      .rb-desc {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.35);
-        line-height: 1.65;
-        max-width: 400px;
-      }
-      .rb-badge {
-        flex-shrink: 0;
-        text-align: center;
-        background: rgba(184, 131, 74, 0.1);
-        border: 0.5px solid rgba(184, 131, 74, 0.2);
-        border-radius: 16px;
-        padding: 20px 28px;
-      }
-      .rb-badge-num {
-        font-family: "Cormorant", serif;
-        font-size: 44px;
-        font-weight: 300;
-        color: var(--amber);
-        line-height: 1;
-        display: block;
-      }
-      .rb-badge-label {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.3);
-        margin-top: 4px;
-      }
+/* ── WHY SECTION ── */
+.why {
+  padding: 80px 48px 120px;
+  max-width: 900px;
+  margin: 0 auto;
+}
 
-      /* ── FINAL CTA ── */
-      .final-cta {
-        padding: 0 24px 140px;
-        text-align: center;
-        position: relative;
-      }
-      .final-cta::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 600px;
-        height: 400px;
-        background: radial-gradient(
-          ellipse,
-          rgba(42, 107, 90, 0.15) 0%,
-          transparent 70%
-        );
-        pointer-events: none;
-      }
-      .final-title {
-        font-family: "Cormorant", serif;
-        font-size: clamp(36px, 6vw, 64px);
-        font-weight: 300;
-        line-height: 1.15;
-        color: white;
-        max-width: 600px;
-        margin: 0 auto 20px;
-      }
-      .final-title em {
-        font-style: italic;
-        color: rgba(255, 255, 255, 0.4);
-      }
-      .final-sub {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.3);
-        margin-bottom: 40px;
-        line-height: 1.6;
-      }
+.why-card {
+  background: rgba(42,107,90,0.08);
+  border: 0.5px solid rgba(109,191,170,0.12);
+  border-radius: 24px;
+  padding: 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.why-card::before {
+  content: '';
+  position: absolute;
+  top: -100px; left: 50%; transform: translateX(-50%);
+  width: 400px; height: 400px;
+  background: radial-gradient(ellipse, rgba(42,107,90,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
 
-      /* ── FOOTER ── */
-      footer {
-        border-top: 0.5px solid rgba(255, 255, 255, 0.06);
-        padding: 40px 48px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 16px;
-      }
-      .footer-logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .footer-name {
-        font-family: "Cormorant", serif;
-        font-size: 18px;
-        font-weight: 300;
-        color: rgba(255, 255, 255, 0.5);
-        letter-spacing: 3px;
-      }
-      .footer-arabic {
-        font-size: 16px;
-        color: rgba(255, 255, 255, 0.15);
-      }
-      .footer-links {
-        display: flex;
-        gap: 24px;
-      }
-      .footer-link {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.2);
-        text-decoration: none;
-        letter-spacing: 0.04em;
-        transition: color 0.2s;
-      }
-      .footer-link:hover {
-        color: rgba(255, 255, 255, 0.4);
-      }
-      .footer-copy {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.15);
-      }
+.why-arabic {
+  font-size: 48px;
+  color: rgba(255,255,255,0.12);
+  direction: rtl;
+  margin-bottom: 24px;
+  position: relative;
+}
+.why-quote {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  position: relative;
+}
+.why-ref {
+  font-size: 12px;
+  color: var(--teal-light);
+  letter-spacing: 0.08em;
+  position: relative;
+}
 
-      /* ── ANIMATIONS ── */
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+/* ── STATS ── */
+.stats {
+  padding: 0 48px 120px;
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  text-align: center;
+}
+.stat-item {}
+.stat-val {
+  font-family: 'Cormorant', serif;
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--teal-light);
+  line-height: 1;
+  display: block;
+}
+.stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  margin-top: 6px;
+  line-height: 1.5;
+}
 
-      .reveal {
-        opacity: 0;
-        transform: translateY(24px);
-        transition:
-          opacity 0.7s ease,
-          transform 0.7s ease;
-      }
-      .reveal.visible {
-        opacity: 1;
-        transform: none;
-      }
+/* ── RAMADAN BANNER ── */
+.ramadan-banner {
+  margin: 0 48px 120px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(135deg, #1a1200, #2d2000);
+  border: 0.5px solid rgba(184,131,74,0.2);
+  border-radius: 20px;
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.rb-left {}
+.rb-tag {
+  font-size: 10px;
+  color: var(--amber);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.rb-title {
+  font-family: 'Cormorant', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: white;
+  margin-bottom: 8px;
+}
+.rb-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.65;
+  max-width: 400px;
+}
+.rb-badge {
+  flex-shrink: 0;
+  text-align: center;
+  background: rgba(184,131,74,0.1);
+  border: 0.5px solid rgba(184,131,74,0.2);
+  border-radius: 16px;
+  padding: 20px 28px;
+}
+.rb-badge-num {
+  font-family: 'Cormorant', serif;
+  font-size: 44px;
+  font-weight: 300;
+  color: var(--amber);
+  line-height: 1;
+  display: block;
+}
+.rb-badge-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  margin-top: 4px;
+}
 
-      /* ── RESPONSIVE ── */
-      @media (max-width: 768px) {
-        nav {
-          padding: 16px 24px;
-        }
-        .features {
-          padding: 80px 24px;
-        }
-        .why {
-          padding: 40px 24px 80px;
-        }
-        .why-card {
-          padding: 36px 24px;
-        }
-        .stats {
-          padding: 0 24px 80px;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 12px;
-        }
-        .stat-val {
-          font-size: 36px;
-        }
-        .ramadan-banner {
-          margin: 0 24px 80px;
-          padding: 28px 24px;
-          flex-direction: column;
-        }
-        .final-cta {
-          padding: 0 24px 100px;
-        }
-        footer {
-          padding: 32px 24px;
-          flex-direction: column;
-          align-items: flex-start;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- NAV -->
-    <nav>
-      <a href="#" class="nav-logo">
-        <svg width="24" height="28" viewBox="0 0 72 76" fill="none">
-          <path
-            d="M10 30 Q8 8 28 5 Q50 2 56 24 Q62 44 40 57 Q26 65 18 76"
-            fill="none"
-            stroke="rgba(109,191,170,0.9)"
-            stroke-width="4"
-            stroke-linecap="round"
-          />
-          <path
-            d="M28 5 Q58 0 64 22 Q70 40 52 54"
-            fill="none"
-            stroke="rgba(109,191,170,0.3)"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-          <circle cx="12" cy="68" r="5" fill="rgba(109,191,170,0.9)" />
-          <circle cx="26" cy="75" r="5" fill="rgba(109,191,170,0.55)" />
-          <circle cx="40" cy="71" r="5" fill="rgba(109,191,170,0.25)" />
-        </svg>
-        <span class="nav-logo-text">Simaa</span>
-        <span class="nav-arabic">سماع</span>
-      </a>
-      <a href="#waitlist" class="nav-cta">Join the waitlist</a>
-    </nav>
+/* ── FINAL CTA ── */
+.final-cta {
+  padding: 0 24px 140px;
+  text-align: center;
+  position: relative;
+}
+.final-cta::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(42,107,90,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.final-title {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: white;
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+.final-title em { font-style: italic; color: rgba(255,255,255,0.4); }
+.final-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-content">
-        <div class="hero-mark">
-          <svg width="52" height="58" viewBox="0 0 72 76" fill="none">
-            <path
-              d="M10 30 Q8 8 28 5 Q50 2 56 24 Q62 44 40 57 Q26 65 18 76"
-              fill="none"
-              stroke="rgba(109,191,170,0.9)"
-              stroke-width="4"
-              stroke-linecap="round"
-            />
-            <path
-              d="M28 5 Q58 0 64 22 Q70 40 52 54"
-              fill="none"
-              stroke="rgba(109,191,170,0.3)"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-            <circle cx="12" cy="68" r="5" fill="rgba(109,191,170,0.9)" />
-            <circle cx="26" cy="75" r="5" fill="rgba(109,191,170,0.55)" />
-            <circle cx="40" cy="71" r="5" fill="rgba(109,191,170,0.25)" />
-          </svg>
-        </div>
+/* ── FOOTER ── */
+footer {
+  border-top: 0.5px solid rgba(255,255,255,0.06);
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer-name {
+  font-family: 'Cormorant', serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 3px;
+}
+.footer-arabic {
+  font-size: 16px;
+  color: rgba(255,255,255,0.15);
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+.footer-link {
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.footer-link:hover { color: rgba(255,255,255,0.4); }
+.footer-copy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.15);
+}
 
-        <div class="hero-eyebrow">Coming soon · Muslim wellness</div>
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-        <h1 class="hero-title">Simaa</h1>
-        <div class="hero-arabic">سماع</div>
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
 
-        <p class="hero-tagline">
-          "Listen to what your soul already knows."<br />
-          Guided dhikr, sleep stories & daily reflection — rooted in your faith.
-        </p>
+/* ── MAILERLITE DIRECT EMBED OVERRIDES ── */
+#mlb2-41872964.ml-form-embedContainer,
+#mlb2-41872964-2.ml-form-embedContainer {
+  width: 100% !important;
+}
+#mlb2-41872964 .ml-form-embedWrapper,
+#mlb2-41872964-2 .ml-form-embedWrapper {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+#mlb2-41872964 .ml-form-embedWrapper.embedForm,
+#mlb2-41872964-2 .ml-form-embedWrapper.embedForm {
+  max-width: 100% !important;
+}
+#mlb2-41872964 .ml-form-embedBody,
+#mlb2-41872964-2 .ml-form-embedBody {
+  padding: 0 !important;
+}
+#mlb2-41872964 .ml-form-embedContent,
+#mlb2-41872964-2 .ml-form-embedContent {
+  display: none !important;
+}
+#mlb2-41872964 .ml-form-horizontalRow input,
+#mlb2-41872964-2 .ml-form-horizontalRow input {
+  background: rgba(255,255,255,0.06) !important;
+  border: 0.5px solid rgba(255,255,255,0.15) !important;
+  border-radius: 12px !important;
+  color: white !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 300 !important;
+  padding: 14px 18px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  transition: border-color 0.2s, background 0.2s !important;
+  line-height: 1.4 !important;
+}
+#mlb2-41872964 .ml-form-horizontalRow input:focus,
+#mlb2-41872964-2 .ml-form-horizontalRow input:focus {
+  border-color: rgba(109,191,170,0.5) !important;
+  background: rgba(255,255,255,0.09) !important;
+  outline: none !important;
+}
+#mlb2-41872964 .ml-form-horizontalRow input::placeholder,
+#mlb2-41872964-2 .ml-form-horizontalRow input::placeholder {
+  color: rgba(255,255,255,0.3) !important;
+}
+#mlb2-41872964 .ml-form-horizontalRow button.primary,
+#mlb2-41872964-2 .ml-form-horizontalRow button.primary,
+#mlb2-41872964 .ml-mobileButton-horizontal button,
+#mlb2-41872964-2 .ml-mobileButton-horizontal button {
+  background: #2a6b5a !important;
+  background-color: #2a6b5a !important;
+  border: none !important;
+  border-radius: 12px !important;
+  border-color: #2a6b5a !important;
+  box-shadow: none !important;
+  color: white !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  padding: 14px 20px !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  transition: background 0.2s !important;
+}
+#mlb2-41872964 .ml-form-horizontalRow button.primary:hover,
+#mlb2-41872964-2 .ml-form-horizontalRow button.primary:hover,
+#mlb2-41872964 .ml-mobileButton-horizontal button:hover,
+#mlb2-41872964-2 .ml-mobileButton-horizontal button:hover {
+  background: #3d8a76 !important;
+  background-color: #3d8a76 !important;
+}
+.ml-mobileButton-horizontal {
+  display: none !important;
+}
+#mlb2-41872964 .ml-button-horizontal,
+#mlb2-41872964-2 .ml-button-horizontal {
+  width: auto !important;
+  float: none !important;
+}
+#mlb2-41872964 .ml-button-horizontal button.primary,
+#mlb2-41872964-2 .ml-button-horizontal button.primary {
+  white-space: nowrap !important;
+  width: auto !important;
+  min-width: 140px !important;
+}
+#mlb2-41872964 .ml-form-successBody,
+#mlb2-41872964-2 .ml-form-successBody {
+  padding: 0 !important;
+}
+#mlb2-41872964 .ml-form-successContent,
+#mlb2-41872964-2 .ml-form-successContent {
+  background: rgba(42,107,90,0.15) !important;
+  border: 0.5px solid rgba(109,191,170,0.2) !important;
+  border-radius: 16px !important;
+  padding: 28px 24px !important;
+  text-align: center !important;
+  margin: 0 !important;
+}
+#mlb2-41872964 .ml-form-successContent h4,
+#mlb2-41872964-2 .ml-form-successContent h4 {
+  font-family: 'Cormorant', serif !important;
+  font-size: 22px !important;
+  font-weight: 300 !important;
+  color: white !important;
+  margin-bottom: 8px !important;
+  text-align: center !important;
+}
+#mlb2-41872964 .ml-form-successContent p,
+#mlb2-41872964-2 .ml-form-successContent p {
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 13px !important;
+  color: rgba(255,255,255,0.45) !important;
+  text-align: center !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+}
 
-        <!-- WAITLIST FORM -->
-        <div id="waitlist">
-          <div class="waitlist-form" id="form-container">
-            <div class="form-row">
-              <input
-                class="form-input"
-                type="email"
-                id="email-input"
-                placeholder="your@email.com"
-                autocomplete="email"
-              />
-              <button class="form-btn" onclick="handleSubmit()">
-                Join waitlist →
-              </button>
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .features { padding: 80px 24px; }
+  .why { padding: 40px 24px 80px; }
+  .why-card { padding: 36px 24px; }
+  .stats { padding: 0 24px 80px; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .stat-val { font-size: 36px; }
+  .ramadan-banner { margin: 0 24px 80px; padding: 28px 24px; flex-direction: column; }
+  .final-cta { padding: 0 24px 100px; }
+  footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg width="24" height="28" viewBox="0 0 72 76" fill="none">
+      <path d="M10 30 Q8 8 28 5 Q50 2 56 24 Q62 44 40 57 Q26 65 18 76" fill="none" stroke="rgba(109,191,170,0.9)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M28 5 Q58 0 64 22 Q70 40 52 54" fill="none" stroke="rgba(109,191,170,0.3)" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="12" cy="68" r="5" fill="rgba(109,191,170,0.9)"/>
+      <circle cx="26" cy="75" r="5" fill="rgba(109,191,170,0.55)"/>
+      <circle cx="40" cy="71" r="5" fill="rgba(109,191,170,0.25)"/>
+    </svg>
+    <span class="nav-logo-text">Simaa</span>
+    <span class="nav-arabic">سماع</span>
+  </a>
+  <a href="#waitlist" class="nav-cta">Join the waitlist</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-mark">
+      <svg width="52" height="58" viewBox="0 0 72 76" fill="none">
+        <path d="M10 30 Q8 8 28 5 Q50 2 56 24 Q62 44 40 57 Q26 65 18 76" fill="none" stroke="rgba(109,191,170,0.9)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M28 5 Q58 0 64 22 Q70 40 52 54" fill="none" stroke="rgba(109,191,170,0.3)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="68" r="5" fill="rgba(109,191,170,0.9)"/>
+        <circle cx="26" cy="75" r="5" fill="rgba(109,191,170,0.55)"/>
+        <circle cx="40" cy="71" r="5" fill="rgba(109,191,170,0.25)"/>
+      </svg>
+    </div>
+
+    <div class="hero-eyebrow">Coming soon · Muslim wellness</div>
+
+    <h1 class="hero-title">Simaa</h1>
+    <div class="hero-arabic">سماع</div>
+
+    <p class="hero-tagline">
+      "Listen to what your soul already knows."<br>
+      Guided dhikr, sleep stories & daily reflection — rooted in your faith.
+    </p>
+
+    <!-- WAITLIST FORM -->
+    <div id="waitlist" style="width:100%; max-width:480px; margin: 0 auto;">
+      <div id="mlb2-41872964" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-41872964">
+        <div class="ml-form-align-center">
+          <div class="ml-form-embedWrapper embedForm">
+            <div class="ml-form-embedBody ml-form-embedBodyHorizontal row-form">
+              <div class="ml-form-embedContent" style="margin-bottom:0;"></div>
+              <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2385912/forms/188693996654036026/subscribe" data-code="" method="post" target="_blank">
+                <div class="ml-form-formContent horozintalForm">
+                  <div class="ml-form-horizontalRow" style="display:flex; gap:8px; align-items:stretch;">
+                    <div class="ml-input-horizontal" style="flex:1;">
+                      <div style="width:100%;" class="horizontal-fields">
+                        <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                          <input type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="your@email.com" autocomplete="email">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-button-horizontal primary" style="flex-shrink:0;">
+                      <button type="submit" class="primary">Join waitlist →</button>
+                      <button disabled="disabled" style="display:none;" type="button" class="loading">
+                        <div class="ml-form-embedSubmitLoad"></div>
+                        <span class="sr-only">Loading...</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" name="ml-submit" value="1">
+                <div class="ml-mobileButton-horizontal">
+                  <button type="submit" class="primary">Join waitlist →</button>
+                </div>
+                <input type="hidden" name="anticsrf" value="true">
+              </form>
             </div>
-
-            <div class="form-question">
-              <div class="form-question-label">
-                What's your biggest challenge? (optional)
-              </div>
-              <div class="form-question-opts">
-                <button class="fq-opt" onclick="toggleOpt(this)">
-                  Anxiety & stress
-                </button>
-                <button class="fq-opt" onclick="toggleOpt(this)">Sleep</button>
-                <button class="fq-opt" onclick="toggleOpt(this)">
-                  Staying consistent
-                </button>
-                <button class="fq-opt" onclick="toggleOpt(this)">
-                  Feeling connected to deen
-                </button>
-                <button class="fq-opt" onclick="toggleOpt(this)">
-                  All of the above
-                </button>
+            <div class="ml-form-successBody row-success" style="display:none;">
+              <div class="ml-form-successContent">
+                <h4>You're on the list.</h4>
+                <p>JazakAllahu khayran. We'll be in touch when Simaa launches.</p>
               </div>
             </div>
-
-            <div class="form-note">
-              No spam. Just a notification when we launch. 🤍
-            </div>
           </div>
-
-          <div class="success-msg" id="success-msg">
-            <div class="success-icon">🌿</div>
-            <div class="success-title">You're on the list.</div>
-            <div class="success-sub">
-              JazakAllahu khayran. We'll let you know the moment Simaa is
-              ready.<br />Founding member pricing reserved for waitlist only.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURES -->
-    <section class="features">
-      <div class="features-eyebrow">What's inside</div>
-      <h2 class="features-title">
-        Everything your faith <em>already</em><br />prescribes for your
-        wellbeing
-      </h2>
-
-      <div class="features-grid">
-        <div class="feature-card reveal">
-          <span class="feature-icon">📿</span>
-          <div class="feature-title">Guided Dhikr</div>
-          <div class="feature-desc">
-            Morning adhkar, evening remembrance, stress relief, and more.
-            Scholar-approved scripts with guided audio — 5, 10, and 15-minute
-            sessions that fit any schedule.
-          </div>
-          <span class="feature-tag">CORE FEATURE</span>
-        </div>
-
-        <div class="feature-card reveal">
-          <span class="feature-icon">🌙</span>
-          <div class="feature-title">Sleep Stories</div>
-          <div class="feature-desc">
-            Softly narrated stories from the seerah and Quran to guide you into
-            peaceful sleep. The Night of Isra', Companions of the Cave, the
-            Garden of Jannah — and more every month.
-          </div>
-          <span class="feature-tag">FAN FAVOURITE</span>
-        </div>
-
-        <div class="feature-card reveal">
-          <span class="feature-icon">📖</span>
-          <div class="feature-title">Daily Reflection</div>
-          <div class="feature-desc">
-            A Quranic verse to anchor your day. A mood check-in. Two gentle
-            prompts for gratitude and intention. Takes 3 minutes — stays with
-            you all day.
-          </div>
-          <span class="feature-tag">DAILY HABIT</span>
-        </div>
-
-        <div class="feature-card reveal">
-          <span class="feature-icon">🔥</span>
-          <div class="feature-title">Streak & Progress</div>
-          <div class="feature-desc">
-            Consistency is what makes dhikr transformative. Track your daily
-            practice, celebrate milestones, and build habits that last beyond
-            Ramadan.
-          </div>
-          <span class="feature-tag">RETENTION</span>
-        </div>
-
-        <div class="feature-card reveal">
-          <span class="feature-icon">🌙</span>
-          <div class="feature-title">Ramadan Mode</div>
-          <div class="feature-desc">
-            A structured 30-day wellness journey built around the blessed month.
-            One session per day, a full-month calendar, and your biggest annual
-            spiritual reset.
-          </div>
-          <span class="feature-tag">SEASONAL</span>
-        </div>
-
-        <div class="feature-card reveal">
-          <span class="feature-icon">🔒</span>
-          <div class="feature-title">Privacy First</div>
-          <div class="feature-desc">
-            Your faith is personal. We collect the minimum data necessary, never
-            sell anything, and you can delete everything at any time. Built with
-            the lesson of Muslim Pro in mind.
-          </div>
-          <span class="feature-tag">TRUST</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY QUOTE -->
-    <section class="why reveal">
-      <div class="why-card">
-        <div class="why-arabic">
-          أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ
-        </div>
-        <div class="why-quote">
-          "Verily, in the remembrance of Allah<br />do hearts find rest."
-        </div>
-        <div class="why-ref">Surah Ar-Ra'd · 13:28</div>
-      </div>
-    </section>
-
-    <!-- STATS -->
-    <div class="stats reveal">
-      <div class="stat-item">
-        <span class="stat-val">1.9B</span>
-        <div class="stat-label">
-          Muslims globally — with no quality wellness app built for them
-        </div>
-      </div>
-      <div class="stat-item">
-        <span class="stat-val">43%</span>
-        <div class="stat-label">
-          Of Muslims report serious distress but only 11% ever seek help
-        </div>
-      </div>
-      <div class="stat-item">
-        <span class="stat-val">$0</span>
-        <div class="stat-label">
-          Calm costs nothing to use — but speaks no Islamic language
         </div>
       </div>
     </div>
 
-    <!-- RAMADAN BANNER -->
-    <div class="ramadan-banner reveal">
-      <div class="rb-left">
-        <div class="rb-tag">Ramadan 1447 · Coming</div>
-        <div class="rb-title">Your 30-day spiritual reset</div>
-        <div class="rb-desc">
-          Simaa's Ramadan mode is a structured wellness journey built around the
-          blessed month — a new session every day, a full-month calendar, and
-          the spiritual intensity you've been looking for.
-        </div>
-      </div>
-      <div class="rb-badge">
-        <span class="rb-badge-num">30</span>
-        <div class="rb-badge-label">days · 30 sessions</div>
-      </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="features-eyebrow">What's inside</div>
+  <h2 class="features-title">Everything your faith <em>already</em><br>prescribes for your wellbeing</h2>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feature-icon">📿</span>
+      <div class="feature-title">Guided Dhikr</div>
+      <div class="feature-desc">Morning adhkar, evening remembrance, stress relief, and more. Scholar-approved scripts with guided audio — 5, 10, and 15-minute sessions that fit any schedule.</div>
+      <span class="feature-tag">CORE FEATURE</span>
     </div>
 
-    <!-- FINAL CTA -->
-    <section class="final-cta">
-      <h2 class="final-title">
-        Your deen deserves <em>better</em><br />than a generic app.
-      </h2>
-      <p class="final-sub">
-        Be the first to experience Simaa. Founding members get 50% off, forever.
-      </p>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🌙</span>
+      <div class="feature-title">Sleep Stories</div>
+      <div class="feature-desc">Softly narrated stories from the seerah and Quran to guide you into peaceful sleep. The Night of Isra', Companions of the Cave, the Garden of Jannah — and more every month.</div>
+      <span class="feature-tag">FAN FAVOURITE</span>
+    </div>
 
-      <div
-        class="waitlist-form"
-        style="opacity: 1; animation: none"
-        id="form-container-2"
-      >
-        <div class="form-row">
-          <input
-            class="form-input"
-            type="email"
-            id="email-input-2"
-            placeholder="your@email.com"
-            autocomplete="email"
-          />
-          <button class="form-btn" onclick="handleSubmit2()">
-            Join waitlist →
-          </button>
+    <div class="feature-card reveal">
+      <span class="feature-icon">📖</span>
+      <div class="feature-title">Daily Reflection</div>
+      <div class="feature-desc">A Quranic verse to anchor your day. A mood check-in. Two gentle prompts for gratitude and intention. Takes 3 minutes — stays with you all day.</div>
+      <span class="feature-tag">DAILY HABIT</span>
+    </div>
+
+    <div class="feature-card reveal">
+      <span class="feature-icon">🔥</span>
+      <div class="feature-title">Streak & Progress</div>
+      <div class="feature-desc">Consistency is what makes dhikr transformative. Track your daily practice, celebrate milestones, and build habits that last beyond Ramadan.</div>
+      <span class="feature-tag">RETENTION</span>
+    </div>
+
+    <div class="feature-card reveal">
+      <span class="feature-icon">🌙</span>
+      <div class="feature-title">Ramadan Mode</div>
+      <div class="feature-desc">A structured 30-day wellness journey built around the blessed month. One session per day, a full-month calendar, and your biggest annual spiritual reset.</div>
+      <span class="feature-tag">SEASONAL</span>
+    </div>
+
+    <div class="feature-card reveal">
+      <span class="feature-icon">🔒</span>
+      <div class="feature-title">Privacy First</div>
+      <div class="feature-desc">Your faith is personal. We collect the minimum data necessary, never sell anything, and you can delete everything at any time. Built with the lesson of Muslim Pro in mind.</div>
+      <span class="feature-tag">TRUST</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHY QUOTE -->
+<section class="why reveal">
+  <div class="why-card">
+    <div class="why-arabic">أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ</div>
+    <div class="why-quote">"Verily, in the remembrance of Allah<br>do hearts find rest."</div>
+    <div class="why-ref">Surah Ar-Ra'd · 13:28</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats reveal">
+  <div class="stat-item">
+    <span class="stat-val">1.9B</span>
+    <div class="stat-label">Muslims globally — with no quality wellness app built for them</div>
+  </div>
+  <div class="stat-item">
+    <span class="stat-val">43%</span>
+    <div class="stat-label">Of Muslims report serious distress but only 11% ever seek help</div>
+  </div>
+  <div class="stat-item">
+    <span class="stat-val">$0</span>
+    <div class="stat-label">Calm costs nothing to use — but speaks no Islamic language</div>
+  </div>
+</div>
+
+<!-- RAMADAN BANNER -->
+<div class="ramadan-banner reveal">
+  <div class="rb-left">
+    <div class="rb-tag">Ramadan 1447 · Coming</div>
+    <div class="rb-title">Your 30-day spiritual reset</div>
+    <div class="rb-desc">Simaa's Ramadan mode is a structured wellness journey built around the blessed month — a new session every day, a full-month calendar, and the spiritual intensity you've been looking for.</div>
+  </div>
+  <div class="rb-badge">
+    <span class="rb-badge-num">30</span>
+    <div class="rb-badge-label">days · 30 sessions</div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2 class="final-title">Your deen deserves <em>better</em><br>than a generic app.</h2>
+  <p class="final-sub">Be the first to experience Simaa. Founding members get 50% off, forever.</p>
+
+  <div style="width:100%; max-width:480px; margin: 0 auto;">
+    <div id="mlb2-41872964-2" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-41872964">
+      <div class="ml-form-align-center">
+        <div class="ml-form-embedWrapper embedForm">
+          <div class="ml-form-embedBody ml-form-embedBodyHorizontal row-form">
+            <div class="ml-form-embedContent" style="margin-bottom:0;"></div>
+            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2385912/forms/188693996654036026/subscribe" data-code="" method="post" target="_blank">
+              <div class="ml-form-formContent horozintalForm">
+                  <div class="ml-form-horizontalRow" style="display:flex; gap:8px; align-items:stretch;">
+                    <div class="ml-input-horizontal" style="flex:1;">
+                      <div style="width:100%;" class="horizontal-fields">
+                        <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                          <input type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="your@email.com" autocomplete="email">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-button-horizontal primary" style="flex-shrink:0;">
+                      <button type="submit" class="primary">Join waitlist →</button>
+                      <button disabled="disabled" style="display:none;" type="button" class="loading">
+                        <div class="ml-form-embedSubmitLoad"></div>
+                        <span class="sr-only">Loading...</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              <input type="hidden" name="ml-submit" value="1">
+              <input type="hidden" name="anticsrf" value="true">
+            </form>
+          </div>
+          <div class="ml-form-successBody row-success" style="display:none;">
+            <div class="ml-form-successContent">
+              <h4>You're on the list.</h4>
+              <p>JazakAllahu khayran. Founding member pricing reserved for you.</p>
+            </div>
+          </div>
         </div>
-        <div class="form-note">
-          Founding member pricing · Limited spots · No spam
-        </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="success-msg" id="success-msg-2">
-        <div class="success-icon">🌿</div>
-        <div class="success-title">You're on the list.</div>
-        <div class="success-sub">
-          JazakAllahu khayran. Founding member pricing reserved for you.
-        </div>
-      </div>
-    </section>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg width="18" height="22" viewBox="0 0 72 76" fill="none">
+      <path d="M10 30 Q8 8 28 5 Q50 2 56 24 Q62 44 40 57 Q26 65 18 76" fill="none" stroke="rgba(109,191,170,0.5)" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="12" cy="68" r="5" fill="rgba(109,191,170,0.5)"/>
+      <circle cx="26" cy="75" r="5" fill="rgba(109,191,170,0.3)"/>
+      <circle cx="40" cy="71" r="5" fill="rgba(109,191,170,0.15)"/>
+    </svg>
+    <span class="footer-name">Simaa</span>
+    <span class="footer-arabic">سماع</span>
+  </div>
+  <div class="footer-links">
+    <a href="#waitlist" class="footer-link">Join waitlist</a>
+  </div>
+  <div class="footer-copy">© 2025 Simaa. All rights reserved.</div>
+</footer>
 
-    <!-- FOOTER -->
-    <footer>
-      <div class="footer-logo">
-        <svg width="18" height="22" viewBox="0 0 72 76" fill="none">
-          <path
-            d="M10 30 Q8 8 28 5 Q50 2 56 24 Q62 44 40 57 Q26 65 18 76"
-            fill="none"
-            stroke="rgba(109,191,170,0.5)"
-            stroke-width="4"
-            stroke-linecap="round"
-          />
-          <circle cx="12" cy="68" r="5" fill="rgba(109,191,170,0.5)" />
-          <circle cx="26" cy="75" r="5" fill="rgba(109,191,170,0.3)" />
-          <circle cx="40" cy="71" r="5" fill="rgba(109,191,170,0.15)" />
-        </svg>
-        <span class="footer-name">Simaa</span>
-        <span class="footer-arabic">سماع</span>
-      </div>
-      <div class="footer-links">
-        <a href="#waitlist" class="footer-link">Join waitlist</a>
-      </div>
-      <div class="footer-copy">© 2025 Simaa. All rights reserved.</div>
-    </footer>
+<script>
+/* ── SCROLL REVEAL ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    <script>
-      /* ─────────────────────────────────────────────
-   BREVO CONFIGURATION
-   1. Sign up free at brevo.com
-   2. Go to Account → SMTP & API → API Keys → Generate
-   3. Create a list called "Simaa Waitlist" and copy its numeric ID
-   4. Paste both values below
-───────────────────────────────────────────── */
-      const BREVO_API_KEY =
-        "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"; // e.g. 'xkeysib-abc123...'
-      const BREVO_LIST_ID = 3; // e.g. 3  (numeric ID from Brevo)
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-      /* ── BREVO SUBMIT ── */
-      async function submitToBrevo(email, challenge) {
-        const payload = {
-          email,
-          listIds: [BREVO_LIST_ID],
-          updateEnabled: true,
-          attributes: {
-            CHALLENGE: challenge || "",
-            SOURCE: "waitlist",
-          },
-        };
+/* ── SMOOTH ANCHOR ── */
+document.querySelectorAll('a[href="#waitlist"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector('#waitlist').scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+<!-- MailerLite form scripts -->
+<script src="https://groot.mailerlite.com/js/w/webforms.min.js?vb397d78ebaa8a0f631d35384c46d781b" type="text/javascript"></script>
+<script>
+  fetch("https://assets.mailerlite.com/jsonp/2385912/forms/188693996654036026/takel");
+  function ml_webform_success_41872964() {
+    var $ = ml_jQuery || jQuery;
+    $('.ml-subscribe-form-41872964 .row-success').show();
+    $('.ml-subscribe-form-41872964 .row-form').hide();
+  }
+</script>
 
-        const res = await fetch("https://api.brevo.com/v3/contacts", {
-          method: "POST",
-          headers: {
-            "api-key": BREVO_API_KEY,
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
-
-        // 201 = created, 204 = already exists & updated — both are success
-        if (!res.ok && res.status !== 204) {
-          const err = await res.json().catch(() => ({}));
-          throw new Error(err.message || `Brevo error ${res.status}`);
-        }
-      }
-
-      /* ── GET SELECTED CHALLENGE ── */
-      function getSelectedChallenge() {
-        const sel = document.querySelector(".fq-opt.sel");
-        return sel ? sel.textContent.trim() : "";
-      }
-
-      /* ── FORM 1 (hero) ── */
-      async function handleSubmit() {
-        const emailEl = document.getElementById("email-input");
-        const email = emailEl.value.trim();
-
-        if (!email || !validateEmail(email)) {
-          emailEl.style.outline = "1px solid rgba(255,100,100,0.5)";
-          emailEl.focus();
-          return;
-        }
-        emailEl.style.outline = "";
-
-        const btn = document.querySelector("#form-container .form-btn");
-        btn.textContent = "Adding you...";
-        btn.disabled = true;
-
-        try {
-          await submitToBrevo(email, getSelectedChallenge());
-          showSuccess("form-container", "success-msg");
-        } catch (e) {
-          console.error("Brevo error:", e);
-          btn.textContent = "Join waitlist →";
-          btn.disabled = false;
-          showError("form-container", e.message);
-        }
-      }
-
-      /* ── FORM 2 (footer CTA) ── */
-      async function handleSubmit2() {
-        const emailEl = document.getElementById("email-input-2");
-        const email = emailEl.value.trim();
-
-        if (!email || !validateEmail(email)) {
-          emailEl.style.outline = "1px solid rgba(255,100,100,0.5)";
-          emailEl.focus();
-          return;
-        }
-        emailEl.style.outline = "";
-
-        const btn = document.querySelector("#form-container-2 .form-btn");
-        btn.textContent = "Adding you...";
-        btn.disabled = true;
-
-        try {
-          await submitToBrevo(email, "");
-          showSuccess("form-container-2", "success-msg-2");
-        } catch (e) {
-          console.error("Brevo error:", e);
-          btn.textContent = "Join waitlist →";
-          btn.disabled = false;
-          showError("form-container-2", e.message);
-        }
-      }
-
-      /* ── HELPERS ── */
-      function validateEmail(e) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
-      }
-
-      function showSuccess(formId, msgId) {
-        document.getElementById(formId).style.display = "none";
-        const msg = document.getElementById(msgId);
-        msg.classList.add("show");
-      }
-
-      function showError(formId, message) {
-        // Remove any existing error
-        const existing = document.querySelector(`#${formId} .form-error`);
-        if (existing) existing.remove();
-
-        const el = document.createElement("div");
-        el.className = "form-error";
-        el.style.cssText =
-          "font-size:12px;color:rgba(255,120,120,0.8);text-align:center;margin-top:4px;";
-        el.textContent = message.includes("already")
-          ? "You're already on the list! We'll be in touch."
-          : "Something went wrong — please try again.";
-        document.getElementById(formId).appendChild(el);
-      }
-
-      /* ── CHALLENGE TOGGLE (single-select) ── */
-      function toggleOpt(el) {
-        // Deselect all others, toggle clicked
-        document.querySelectorAll(".fq-opt").forEach((o) => {
-          if (o !== el) o.classList.remove("sel");
-        });
-        el.classList.toggle("sel");
-      }
-
-      /* ── ENTER KEY ON INPUT ── */
-      document.addEventListener("DOMContentLoaded", () => {
-        document
-          .getElementById("email-input")
-          .addEventListener("keydown", (e) => {
-            if (e.key === "Enter") handleSubmit();
-          });
-        document
-          .getElementById("email-input-2")
-          .addEventListener("keydown", (e) => {
-            if (e.key === "Enter") handleSubmit2();
-          });
-      });
-
-      /* ── SCROLL REVEAL ── */
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-              setTimeout(() => entry.target.classList.add("visible"), i * 80);
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
-      );
-
-      document
-        .querySelectorAll(".reveal")
-        .forEach((el) => observer.observe(el));
-
-      /* ── SMOOTH ANCHOR ── */
-      document.querySelectorAll('a[href="#waitlist"]').forEach((a) => {
-        a.addEventListener("click", (e) => {
-          e.preventDefault();
-          document
-            .querySelector("#waitlist")
-            .scrollIntoView({ behavior: "smooth" });
-        });
-      });
-    </script>
-  </body>
+</body>
 </html>
